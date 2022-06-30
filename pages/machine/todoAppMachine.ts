@@ -1,7 +1,7 @@
 import { createMachine, assign } from 'xstate';
 
 export const todoAppMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBcD2FUAIC2BDAxgBYCWAdmAHQA2quEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uZMVSkA2gAYAuolAAHWcRVq9IAB6IAbFYoB2AMwBGTQA4AnJ4CsDh+7vuADQgAJ6IALSeDhTumg52rgAsiQBMXv5uAL6ZwUI4BCScEvSkjEJsYABOlaiVFPpUygBmtdgUeSKF4rQlZTJyCkomGjpmhrDGqqRmlgjhyU4UNq6adl5xKe6+rnbBYXNWjhSJNu5WmlbOaSfZuTL5opzlmMWQrADClWDKYJgAcmAAO5jIzDGaITwUNwuBwpRJuTSadwpVx7CKHRIUByaJwOKxw-xOFZ2W4gDoFMQUfBfH6YciA6QYCgAZUIqEBUgAYq1MABJUj6ACuyFY3Mq2EwZCFyEw70IuFKYBBEzBSAsEScROOLlSWysXkSdkSPjRczxmgoSUNdicVncXlcKXiiVJ5MelGp32Qv3pjNQLLZHNKmDFEv50tYzMFACNsMZlZNTGrZprbNDcSk4V4vE4vCjTfN8UsUvjvJoUnFXFZXfdOpTPbTfUIKLBcNwpEJ2GpKAoBO1axTOA3vXSgX6W22OzJ5KReEMplpdGrxonpsnECk1pbYkb9atK8kC6WKAbkv59UT4k4axgHl0qTSR02ZBP28HO1UanUGs1Wv3b3WQ6Pj6Y7Nq2b59BgM5zsoC6jMuoJTOCCCpvY6QJC4qxEpqqKhBEzhpk4TpbLCVbONepKkOgcBmG697FFOLAJqqoCzPMObFrERE+Js2y7HhcyYbY8LxFaaQZCSORkgO7r-rILw9JAzFIeuCBGhQKKOFYqQOuceJWAWrguDE8JbAkNpnJmN7CIO3SSO+9yfrUylJqxETGtEmi6a4OweFYuYGQJ4Q5q4SzrNm-lOIk7jYdZd71sBo4Ms2rLslyPLhsKLlrm5glarqUXpA6uZ2F5BYnO4FC5rimoOnYaQOnFgEeolz5MuBjGoNlyFpLYOYlpoiR+Bc2ZOOVpUxOspUlpmCQok1tkPl6IHJTI3WqeEUUpMcmyFfaRleKVXgFga0TuMkQ34v5fi5gt7rrbl8x2HYULeb5ZwBQWLgBFi-heOchybraknZEAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QBcD2FUAIC2BDAxgBYCWAdmAHQA2quEZUmaGsAxBuRWQG6oDWlZljxEylGnQZN0qWAh6p8uZMVSkA2gAYAuolAAHWcRVq9IAB6IAtAEYbAVgoAOACwBOAGwB2AMwuATD42ge4ANCAAntbBmpoULk7+bjY+-k4eTm72LgC+OeFCOAQknBL0pIxCbGAATjWoNRT6VMoAZg3YFIUiJeK05ZUycgpKJho6ZoawxqqkZpYIVh7+HvH2Hh4+XjYuXhvZ4VGLTl5uzjb7ycEuqT55BTJFopxVmGWQrADCNWDKYJgAOTAAHdJkYxvNrE4fPE3G5fDZNIiXAdIlCnHEnBj3Cl7E5EfZ-PcQN1imIukM3v0PgARMBUMDIMBg6YQpAWRDIiheBJuDHefEBfyHaJIuJw+yaHl+XHeYmk56UfA-P6YcjA6QYCgAZUIqGBUgAYh1MABJUj6ACuyFYxpq2EwZCtyEwn0IuAqzPZUxmpnZCysWxh9lSXnS9jcWxcyxFixDLniQS8Up8yU0W3s8sePXJyt+TLVIM1qB1eoNFUwdod5udrG1loARthjCzfXN-VCYR4soEvISeVk-LGlj5Vv4Uv5dq43JoXJonFmME9ehQ86r1cWdbhuFIhOw1JQFAIKUuc5w1wWN0ItzuK0J5KReKNZlpdN7wbNIYtEc5vB5NBGmh8iEIbDl4gTcj4s5zi4CQ2Nii7CGS54qpeRbXtq267jIrC1PUjTNG0HQnkhiqrqh-xXjIN7YRgD5PsoL4TO+rKfh235BBQf4om47j2IiqZOMO8aJjYCLxt2QGIcu5IQPSjL-HuHCHo+-CCNmyGUHJDIFveIyMWor6tmyoALJsFDwZo-hpD49jbLcNjDnYs7cummw3H22S8dJZ5afJuk4XhDRNC0yDtPaJEyZw2kKcW9GKAZ4xvgYH5+qZiBuP4FD8Q4dnRikfKZcOmVZdGcIeEKIbbG4eT5CApDoHAZgKiuZS0bIxlselizuRQ-hAV4fZZAV2xOeOWXAckqTpJk2Q+ZpJGwFSdCQJ1aUct+859ZGqbJBGTgRjGaKbWJ2X9ZoGy+GkM3zWRbV3o8QU1Gt7bdSOjjuXsHh2eB41gXY3IHVKngRvY-ELnVLW5hRhYahhZZGiaNbWi9X6Br42X8ZKQTpAEJweMOFVZb4iS7Gkk7dh4t0rhelHodRmG3oMGCo+xKSrJGdhJEBFOwYTGQUKkKyxJsGSnLkkMaWRtOw8WrNvamXiYw46bwUT+NgS4NiCxcPjhnYwRZNTsn+YpMjyxtNieBQcLjqm+WBLEXhObOMLIiis7+GG442Mb5AWwG31nJ9+yDdZwRjQdNt7OsWxZOBYa1TkQA */
   createMachine(
     {
       context: {
@@ -18,6 +18,9 @@ export const todoAppMachine =
           addTodo: {
             data: void;
           };
+          deleteTodo: {
+            data: void;
+          };
         },
         events: {} as
           | {
@@ -29,6 +32,10 @@ export const todoAppMachine =
             }
           | {
               type: 'Submit';
+            }
+          | {
+              type: 'Delete';
+              todo: string;
             },
       },
       initial: 'loading todos',
@@ -55,6 +62,9 @@ export const todoAppMachine =
           on: {
             'Create New': {
               target: 'create new todo',
+            },
+            Delete: {
+              target: 'delete todo',
             },
           },
         },
@@ -88,6 +98,22 @@ export const todoAppMachine =
                 ],
               },
             },
+          },
+        },
+        'delete todo': {
+          invoke: {
+            src: 'deleteTodo',
+            onDone: [
+              {
+                target: 'loading todos',
+              },
+            ],
+            onError: [
+              {
+                actions: 'assignErrorToContext',
+                target: 'loading todo error',
+              },
+            ],
           },
         },
       },

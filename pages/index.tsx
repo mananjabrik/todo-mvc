@@ -14,6 +14,9 @@ const Home: NextPage = () => {
       addTodo: async (context, event) => {
         todos.add(context.newTodo);
       },
+      deleteTodo: async (context, event) => {
+        todos.delete(event.todo);
+      },
     },
   });
 
@@ -36,6 +39,32 @@ const Home: NextPage = () => {
             >
               create new
             </button>
+          )}
+
+          {state.matches('todos loaded') && (
+            <>
+              {state.context.todos.map((todo) => (
+                <div
+                  key={todo}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <p>{todo}</p>
+                  <button
+                    onClick={() => {
+                      send({
+                        type: 'Delete',
+                        todo,
+                      });
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </>
           )}
           {state.matches('create new todo.Showing Form Input') && (
             <form
